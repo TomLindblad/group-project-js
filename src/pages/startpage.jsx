@@ -5,55 +5,91 @@ import '../startpage.css';
 
 
 function Startpage(){
+    
     const navigate = useNavigate();
-
     const startGame = () => {
         navigate('/gamepage');
     };
 
-    const username = "DiscoDevil69";       //Change to an array of usernames with password? 
-    const password = "1234";
+    // created users-array. 
+    const users = [ 
+        {username: 'admin', password: 'password'},
+        {username: 'discodevil69', password: '1234'},
+        {username: '1337_assblaster', password: 'asdf'}]
 
-    const [userSignin, setUserSignin] = useState();
-    const [passSignin, setPassSignin] = useState();
+    const [userInput, setUserInput] = useState();
+    const [passInput, setPassInput] = useState();
+
+    //////////////////// Shizzle to make the smileyface SMILE when username is OK and password is OK.//////////////
+    // will fix. Maybe. Maybe not. 
+
+    let usernameOk = false;
+    let passwordOk = false;
+
+    let smileyclass = 'input-face fa-regular ';
+    smileyclass += usernameOk === true ? 'fa-face-smile' : 'fa-face-frown';
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     function checkSignin(){
-        console.log(userSignin);
-        console.log(passSignin);
 
-        if(userSignin === username && passSignin === password)  {
-            startGame();
+        let username = "username";
+        let password = "password";
+
+        if (users.find(e => e.username === userInput)){
+            const isUser = (users.find(e => e.username === userInput));
+            
+            username = isUser.username;
+            password = isUser.password;
+
+            if (username === userInput && password === passInput)  {
+                startGame();
+            }
+
+            else { alert("Wrong password."); }
         }
 
-        else{
-            alert("wrong username and/or password.");
-        }
-
+        else {alert(`${userInput} is not a username.`)}
     }
+
+    function createUser(){
+            // HERE IS A FUNCTION TO MAKE A NEW USER. Push username + password to users-array.
+    }
+
     return(
         <>
             <form className="login-container">
-                <label htmlFor="username">Username:</label>
-                <input 
-                    className="inputfield" 
-                    id="input-username" 
-                    type="text" 
-                    placeholder="Input username..." 
-                    name="username" 
-                    required
-                    onChange={(e) => setUserSignin(e.target.value)}></input>
-                <br/>
-                <label htmlFor="password">Password:</label>
-                <input 
-                    className="inputfield" 
-                    id="input-password" 
-                    type="password" 
-                    placeholder="Input password..." 
-                    name="password" 
-                    required
-                    onChange={(e) => setPassSignin(e.target.value)}></input>
-                <button id="login-btn" type="" onClick={checkSignin}>PLAY <i className="fa-solid fa-play"></i></button>
-                <Link to="/gamepage"><p>Fast startgame</p></Link>    {/*For faster start*/}
+                <div className="inputs-container">
+                    <label htmlFor="username">Username:</label>
+                    <div className="input-bar">
+                    <input 
+                        className="inputfield" 
+                        id="input-username" 
+                        type="text" 
+                        placeholder="Input username..." 
+                        name="username" 
+                        required
+                        onChange={(e) => setUserInput(e.target.value)}></input><i className={smileyclass}></i>
+                    </div>
+                    <br/>
+                    <label htmlFor="password">Password:</label>
+                    <div className="input-bar">
+                    <input 
+                        className="inputfield" 
+                        id="input-password" 
+                        type="password" 
+                        placeholder="Input password..." 
+                        name="password" 
+                        required
+                        onChange={(e) => setPassInput(e.target.value)}></input><i className={smileyclass}></i>
+                    </div>
+                    <button id="login-btn" type="" onClick={checkSignin}>PLAY <i className="fa-solid fa-play"></i></button>
+                </div>
+                <div className="bottom-container">
+                    <p className="bottom-link">Create new user</p>
+                    <Link to="/gamepage"><p className="bottom-link">Play as Guest</p></Link>{/*For faster start*/}
+                    <p className="bottom-link">Forgot password?</p>
+                </div>
             </form>
             
         </>
