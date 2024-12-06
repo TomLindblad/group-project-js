@@ -1,3 +1,6 @@
+
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+
 import Startpage from './pages/startpage.jsx';
 import Gamepage from './pages/gamepage.jsx';
 
@@ -5,8 +8,12 @@ function App() {
 
     return(
         <>
-            <Startpage/>
-            <Gamepage/>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Startpage/>}/>
+                <Route path="/gamepage" element={<Gamepage/>}/>
+            </Routes>
+        </BrowserRouter>
         </>
     );
 }
