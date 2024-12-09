@@ -26,6 +26,14 @@ function Startpage(){
     const [newUserInput, setNewUserInput] = useState("");
     const [newPassInput, setNewPassInput] = useState("");
 
+    const [showInput, setShowInput] = useState(false);
+    let showNewUserInput = 'createNewUserContainer ';
+    showNewUserInput += showInput === false ? 'hidden' : '';
+
+    const [showSignin, setShowSignin] = useState(!false);
+    let showSigninInput = "";
+    showSigninInput += showSignin === false ? 'hidden' : '';
+
     //Stuff for making Smileys turn green/red:
     let [usernameOk, setUsernameOk] = useState(false);
     let [passwordOk, setPasswordOk] = useState(false);
@@ -36,9 +44,10 @@ function Startpage(){
     let smileypass = 'input-face fa-regular ';
     smileypass += passwordOk === true ? 'fa-face-smile' : 'fa-face-frown';
 
-    function checkInput(input){
+
+    // --------   FUNCTIONS ---------- 
+    function checkInput(input){ //Changes smilyface to green if username is in the newUsersArray.
         setUserInput(input);
-        console.log(input);
 
         if (newUsersArray.find(e => e.username === input)){
             setUsernameOk(true);
@@ -50,9 +59,8 @@ function Startpage(){
         }
     }
 
-    function checkPassInput(input){
+    function checkPassInput(input){ //Changes smilyface to green if password is correct.
         setPassInput(input);
-        console.log(input);
 
         if (newUsersArray.find(e => e.username === userInput)){
             
@@ -73,7 +81,7 @@ function Startpage(){
         }
     }
 
-    function checkSignin(){
+    function checkSignin(){ //Starts game if username & password is correct. 
 
         let username = "username";
         let password = "password";
@@ -117,7 +125,12 @@ function Startpage(){
         
     }
 
-    function openCreateUserTab(){}      // SHOW THE NEW USER INPUTS
+    function openCreateUserTab(){
+        setShowSignin(!showSignin);        
+        setShowInput(!showInput);
+
+    }      // SHOW THE NEW USER INPUTS
+
 
     function openForgotPasswordTab(){}  // SHOW THE FORGOT PASSWORD INPUT
 
@@ -160,13 +173,12 @@ function Startpage(){
     function checkarray(){
         console.log(usersArray);
         console.log(newUsersArray);
-        console.log(usernameOk);
     }
 
     return(
         <>
             <div className="login-container">
-                <form >
+                <form className={showSigninInput}>
                     <div className="inputs-container">
                         <label htmlFor="username">Username:</label>
                         <div className="input-bar">
@@ -194,15 +206,7 @@ function Startpage(){
                         <button id="login-btn" type="submit" onClick={checkSignin}>PLAY <i className="fa-solid fa-play"></i></button>
                     </div>
                 </form>
-                <div className="bottom-container">
-                    <button className="bottom-link" onClick={createNewUser}>Create new user</button>
-                    <Link to="/gamepage"><p className="bottom-link">Play as Guest</p></Link>{/*For faster start*/}
-                    <p className="bottom-link">Forgot password?</p>
-                </div>
-            </div>
-            <button onClick={checkarray}>check array</button>
-
-            <div className="createNewUserContainer">
+                <div className={showNewUserInput}>
                 <div className="inputs-container">
                     <label htmlFor="new-username">New username:</label>
                     <div className="input-bar">
@@ -231,8 +235,16 @@ function Startpage(){
                             onChange={(e) => setNewPassInput(e.target.value)}>
                         </input><i className="fa-solid fa-dice" onClick={() => randomPassword()}></i>
                     </div>
+                    <button id="login-btn" type="submit" onClick={createNewUser}>CREATE <i className="fa-solid fa-user-plus"></i></button>
                 </div>
             </div>
+                <div className="bottom-container">
+                    <button className="bottom-link" onClick={() => openCreateUserTab()}>Create new user</button>
+                    <Link to="/gamepage"><p className="bottom-link">Play as Guest</p></Link>{/*For faster start*/}
+                    <p className="bottom-link">Forgot password?</p>
+                </div>
+            </div>
+            <button onClick={checkarray}>check array</button>
         </>
     );
 };

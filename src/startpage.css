@@ -94,17 +94,12 @@ body{
     margin: 0 20px;
   }
 
-
-
-
-
-
-
 .createNewUserContainer{
-    border: 1px solid red;
-
-    position: absolute;
     display: flex;
+}
+
+.hidden{
+    display: none;
 }
 
 .fa-dice:hover{
