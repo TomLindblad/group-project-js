@@ -93,3 +93,25 @@ body{
   .bottom-link{
     margin: 0 20px;
   }
+
+
+
+
+
+
+
+.createNewUserContainer{
+    border: 1px solid red;
+
+    position: absolute;
+    display: flex;
+}
+
+.fa-dice:hover{
+    color: #666;
+    cursor: grab;
+}
+
+.fa-dice:active{
+    cursor: grabbing;
+}

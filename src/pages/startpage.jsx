@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import '../startpage.css';
 
-
 function Startpage(){
     
     const navigate = useNavigate();
@@ -12,32 +11,75 @@ function Startpage(){
     };
 
     // created users-array. 
-    const users = [ 
+    let usersArray = [ 
         {username: 'admin', password: 'password'},
         {username: 'discodevil69', password: '1234'},
-        {username: '1337_assblaster', password: 'asdf'}]
+        {username: '1337_assblaster', password: 'asdf'}];
 
+    const [newUsersArray, setNewUsersArray] = useState(usersArray);
+
+    // Input for SIGN IN. 
     const [userInput, setUserInput] = useState();
     const [passInput, setPassInput] = useState();
 
-    //////////////////// Shizzle to make the smileyface SMILE when username is OK and password is OK.//////////////
-    // will fix. Maybe. Maybe not. 
+    // Input for NEW USER.
+    const [newUserInput, setNewUserInput] = useState("");
+    const [newPassInput, setNewPassInput] = useState("");
 
-    let usernameOk = false;
-    let passwordOk = false;
+    //Stuff for making Smileys turn green/red:
+    let [usernameOk, setUsernameOk] = useState(false);
+    let [passwordOk, setPasswordOk] = useState(false);
 
-    let smileyclass = 'input-face fa-regular ';
-    smileyclass += usernameOk === true ? 'fa-face-smile' : 'fa-face-frown';
+    let smileyuser = 'input-face fa-regular ';
+    smileyuser += usernameOk === true ? 'fa-face-smile' : 'fa-face-frown';
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    let smileypass = 'input-face fa-regular ';
+    smileypass += passwordOk === true ? 'fa-face-smile' : 'fa-face-frown';
+
+    function checkInput(input){
+        setUserInput(input);
+        console.log(input);
+
+        if (newUsersArray.find(e => e.username === input)){
+            setUsernameOk(true);
+        }
+
+        else{
+            setUsernameOk(false);
+            setPasswordOk(!true);
+        }
+    }
+
+    function checkPassInput(input){
+        setPassInput(input);
+        console.log(input);
+
+        if (newUsersArray.find(e => e.username === userInput)){
+            
+            const isUser = (newUsersArray.find(e => e.username === userInput));
+            let password = isUser.password;
+
+            if(password === input){
+                setPasswordOk(true);
+            }
+
+            else{
+                setPasswordOk(!true);
+            }
+        }
+
+        else{
+            setPasswordOk(!true);
+        }
+    }
 
     function checkSignin(){
 
         let username = "username";
         let password = "password";
 
-        if (users.find(e => e.username === userInput)){
-            const isUser = (users.find(e => e.username === userInput));
+        if (newUsersArray.find(e => e.username === userInput)){
+            const isUser = (newUsersArray.find(e => e.username === userInput));
             
             username = isUser.username;
             password = isUser.password;
@@ -52,46 +94,145 @@ function Startpage(){
         else {alert(`${userInput} is not a username.`)}
     }
 
-    function createUser(){
-            // HERE IS A FUNCTION TO MAKE A NEW USER. Push username + password to users-array.
+    function createNewUser(){ // FUNCTION FOR CREATING A NEW USER!
+        
+        const nameTaken = newUsersArray.some(e => e.username === newUserInput)
+
+        if (!nameTaken){//Checks if username is not used. 
+            const newUser = {username: newUserInput,
+                             password: newPassInput};
+            
+            if (newUser.password === undefined || newUser.password === ""){
+                alert("Choose a password.")
+            }
+
+            else {
+            setNewUsersArray(newUsersArray => [...newUsersArray, newUser]);
+            setNewPassInput("");
+            setNewUserInput("");
+            }
+        }
+
+        else{alert("Username is not available. Choose another one.")}
+        
+    }
+
+    function openCreateUserTab(){}      // SHOW THE NEW USER INPUTS
+
+    function openForgotPasswordTab(){}  // SHOW THE FORGOT PASSWORD INPUT
+
+    async function randomPassword(){ //ADD RANDOM PASSWORD
+
+        try{
+            const response = await fetch(`https://api.genratr.com/?length=6&uppercase&lowercase&special&numbers`);
+
+            if(!response.ok){
+                throw new Error("Could not fetch resource");
+            }
+        
+            const data = await response.json();
+            setNewPassInput(data.password);
+        }
+        
+        catch(error){
+            console.error(error);
+        }
+    }        
+
+    async function generateRandomUsername(){ //ADD RANDOM USERNAME
+        
+        try{
+            const response = await fetch(`https://usernameapiv1.vercel.app/api/random-usernames`);
+
+            if(!response.ok){
+                throw new Error("Could not fetch resource");
+            }
+        
+            const data = await response.json();
+            setNewUserInput(data.usernames[0]);
+        }
+        
+        catch(error){
+            console.error(error);
+        }
+    }         
+
+    function checkarray(){
+        console.log(usersArray);
+        console.log(newUsersArray);
+        console.log(usernameOk);
     }
 
     return(
         <>
-            <form className="login-container">
-                <div className="inputs-container">
-                    <label htmlFor="username">Username:</label>
-                    <div className="input-bar">
-                    <input 
-                        className="inputfield" 
-                        id="input-username" 
-                        type="text" 
-                        placeholder="Input username..." 
-                        name="username" 
-                        required
-                        onChange={(e) => setUserInput(e.target.value)}></input><i className={smileyclass}></i>
+            <div className="login-container">
+                <form >
+                    <div className="inputs-container">
+                        <label htmlFor="username">Username:</label>
+                        <div className="input-bar">
+                            <input 
+                                className="inputfield" 
+                                id="input-username" 
+                                type="text" 
+                                placeholder="Input username..." 
+                                name="username" 
+                                required
+                                onChange={(e) => checkInput(e.target.value)}></input><i className={smileyuser}></i>
+                        </div>
+                        <br/>
+                        <label htmlFor="password">Password:</label>
+                        <div className="input-bar">
+                            <input 
+                                className="inputfield" 
+                                id="input-password" 
+                                type="password" 
+                                placeholder="Input password..." 
+                                name="password" 
+                                required
+                                onChange={(e) => checkPassInput(e.target.value)}></input><i className={smileypass}></i>
+                        </div>
+                        <button id="login-btn" type="submit" onClick={checkSignin}>PLAY <i className="fa-solid fa-play"></i></button>
                     </div>
-                    <br/>
-                    <label htmlFor="password">Password:</label>
-                    <div className="input-bar">
-                    <input 
-                        className="inputfield" 
-                        id="input-password" 
-                        type="password" 
-                        placeholder="Input password..." 
-                        name="password" 
-                        required
-                        onChange={(e) => setPassInput(e.target.value)}></input><i className={smileyclass}></i>
-                    </div>
-                    <button id="login-btn" type="" onClick={checkSignin}>PLAY <i className="fa-solid fa-play"></i></button>
-                </div>
+                </form>
                 <div className="bottom-container">
-                    <p className="bottom-link">Create new user</p>
+                    <button className="bottom-link" onClick={createNewUser}>Create new user</button>
                     <Link to="/gamepage"><p className="bottom-link">Play as Guest</p></Link>{/*For faster start*/}
                     <p className="bottom-link">Forgot password?</p>
                 </div>
-            </form>
-            
+            </div>
+            <button onClick={checkarray}>check array</button>
+
+            <div className="createNewUserContainer">
+                <div className="inputs-container">
+                    <label htmlFor="new-username">New username:</label>
+                    <div className="input-bar">
+                        <input 
+                            className="inputfield" 
+                            id="input-new-username" 
+                            type="text" 
+                            placeholder="Input new username..." 
+                            name="new-username" 
+                            required
+                            value={newUserInput}
+                            onChange={(e) => setNewUserInput(e.target.value)}>
+                        </input><i className="fa-solid fa-dice" onClick={() => generateRandomUsername()}></i>
+                    </div>
+                    <br/>
+                    <label htmlFor="new-password">New password:</label>
+                    <div className="input-bar">
+                        <input 
+                            className="inputfield" 
+                            id="input-new-password" 
+                            type="text" 
+                            placeholder="Input new password..." 
+                            name="new-password" 
+                            required
+                            value={newPassInput}                        
+                            onChange={(e) => setNewPassInput(e.target.value)}>
+                        </input><i className="fa-solid fa-dice" onClick={() => randomPassword()}></i>
+                    </div>
+                </div>
+            </div>
         </>
     );
 };
