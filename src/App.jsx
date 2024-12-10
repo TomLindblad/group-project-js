@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Startpage from './pages/startpage.jsx';
 import Gamepage from './pages/gamepage.jsx';

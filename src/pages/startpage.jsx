@@ -102,39 +102,46 @@ function Startpage(){
         else {alert(`${userInput} is not a username.`)}
     }
 
-    function createNewUser(){ // FUNCTION FOR CREATING A NEW USER!
+    function createNewUser(){ //Function for making a new user. 
         
         const nameTaken = newUsersArray.some(e => e.username === newUserInput)
 
-        if (!nameTaken){//Checks if username is not used. 
+        if (!nameTaken){ //Checks if username is not used. 
             const newUser = {username: newUserInput,
                              password: newPassInput};
             
-            if (newUser.password === undefined || newUser.password === ""){
+            if (newUser.password === undefined || newUser.password === ""){ //checks that the new password is not blank.
                 alert("Choose a password.")
             }
 
-            else {
+            else { //creates the new username + password in the newUsersArray.
             setNewUsersArray(newUsersArray => [...newUsersArray, newUser]);
             setNewPassInput("");
             setNewUserInput("");
             }
         }
 
-        else{alert("Username is not available. Choose another one.")}
+        else{alert("Username is not available. Choose another one.")} //alerts if the username is already in the newUsersArray.
         
     }
 
-    function openCreateUserTab(){
+    function openCreateUserTab(){ // Switches between the signin- and create new user-inputs
         setShowSignin(!showSignin);        
         setShowInput(!showInput);
+    }      
 
-    }      // SHOW THE NEW USER INPUTS
+    function openForgotPasswordTab(){ // alerts the password if username exists. 
+        if (newUsersArray.find(e => e.username === userInput)){
+            const isUser = (newUsersArray.find(e => e.username === userInput));
+            
+            let username = isUser.username;
+            let password = isUser.password;
 
+            alert(`I trust that you are ${username}! Your password is: ${password}`);
+        }
+    }  
 
-    function openForgotPasswordTab(){}  // SHOW THE FORGOT PASSWORD INPUT
-
-    async function randomPassword(){ //ADD RANDOM PASSWORD
+    async function randomPassword(){ // adds a random password from API.
 
         try{
             const response = await fetch(`https://api.genratr.com/?length=6&uppercase&lowercase&special&numbers`);
@@ -152,7 +159,7 @@ function Startpage(){
         }
     }        
 
-    async function generateRandomUsername(){ //ADD RANDOM USERNAME
+    async function generateRandomUsername(){ // adds a random username from API.
         
         try{
             const response = await fetch(`https://usernameapiv1.vercel.app/api/random-usernames`);
@@ -170,7 +177,7 @@ function Startpage(){
         }
     }         
 
-    function checkarray(){
+    function checkarray(){ //console.logs the newUsersArray. SHALL BE REMOVED... 
         console.log(usersArray);
         console.log(newUsersArray);
     }
@@ -240,10 +247,11 @@ function Startpage(){
             </div>
                 <div className="bottom-container">
                     <button className="bottom-link" onClick={() => openCreateUserTab()}>Create new user</button>
-                    <Link to="/gamepage"><p className="bottom-link">Play as Guest</p></Link>{/*For faster start*/}
-                    <p className="bottom-link">Forgot password?</p>
+                    <Link to="/gamepage"><button className="bottom-link">Play as Guest</button></Link>{/*For faster start*/}
+                    <button className="bottom-link" onClick={() => openForgotPasswordTab()}>Forgot password?</button>
                 </div>
             </div>
+            <br/>
             <button onClick={checkarray}>check array</button>
         </>
     );
