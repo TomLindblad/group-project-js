@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 const GRID_SIZE = 20;
 
 function GamePage() {
-  const [snake, setSnake] = useState([[10, 10]]);
-  const [food, setFood] = useState([5, 5]);
-  const [direction, setDirection] = useState('RIGHT');
-  const [gameOver, setGameOver] = useState(false);
+  const [snake, setSnake] = useState([[10, 10]]); // Initial snake position
+  const [food, setFood] = useState([5, 5]); // Initial food position
+  const [direction, setDirection] = useState('RIGHT'); // Initial direction
+  const [gameOver, setGameOver] = useState(false); // Game over state
   const [score, setScore] = useState(0); // Score state
 
   useEffect(() => {
@@ -92,10 +92,17 @@ function GamePage() {
     <div style={styles.container}>
       <h1>Score: {score}</h1>
       {gameOver ? (
-        <>
+        <div style={styles.gameOverOverlay}>
           <h1 style={styles.gameOverText}>Game Over</h1>
-          <button onClick={restartGame} style={styles.restartButton}>Restart Game</button>
-        </>
+          <button
+            onClick={restartGame}
+            style={styles.restartButton}
+            onMouseEnter={(e) => (e.target.style.backgroundColor = '#e64a19')}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = '#ff5722')}
+          >
+            Restart Game
+          </button>
+        </div>
       ) : (
         <div style={styles.grid}>
           {Array.from({ length: GRID_SIZE }).map((_, row) =>
@@ -137,19 +144,37 @@ const styles = {
     height: '20px',
     border: '1px solid #ccc',
   },
+  gameOverOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)', // Semi-transparent black
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   gameOverText: {
-    color: 'red',
-    fontSize: '2rem',
+    color: 'white',
+    fontSize: '3rem',
+    marginBottom: '20px',
+    textAlign: 'center',
   },
   restartButton: {
-    marginTop: '10px',
-    padding: '10px 20px',
-    backgroundColor: 'blue',
+    padding: '15px 30px',
+    backgroundColor: '#ff5722',
     color: 'white',
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-    fontSize: '16px',
+    fontSize: '18px',
+    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.2)',
+    transition: 'background-color 0.3s ease',
+  },
+  restartButtonHover: {
+    backgroundColor: '#e64a19',
   },
 };
 
