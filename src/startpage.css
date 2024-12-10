@@ -52,14 +52,6 @@ body{
     outline: none;
 }
 
-.random-btn{
-    background-color: #fff;
-    padding: 3px;
-    font-size: 1.2rem;
-    border: 2px solid rgba(0, 0, 0, 0.397);
-    border-radius: 10px;
-}
-
 #login-btn{
     margin-top: 25px;
     padding: 10px 15px;
@@ -91,5 +83,36 @@ body{
   }
 
   .bottom-link{
-    margin: 0 20px;
+    margin: 0 15px;
+    padding: 5px 15px;
+    font-size: 1rem;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #fa800d;
+    border: none;
+    border-radius: 9px;
+    box-shadow: 0 9px #8b8b8b;
+    transition: all 0.2s;
   }
+
+  .bottom-link:hover {background-color: #67c56a}
+
+  .bottom-link:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }
+.hidden{
+    display: none;
+}
+
+.fa-dice:hover{
+    color: #666;
+    cursor: grab;
+}
+
+.fa-dice:active{
+    cursor: grabbing;
+}
