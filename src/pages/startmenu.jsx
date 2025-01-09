@@ -29,13 +29,14 @@ function Startmenu(){
 
     return(
     <>
-        <div className="MENUBOX">
-            <p>Silly Willy Snake-Game</p>
+        <div className="mainmenu-container">
+            <h2 className="title title-silly">SILLYWILLY</h2>
+            <h2 className="title title-snake"><span className="bigger-letter letter-left">S</span>NAK<span className="bigger-letter letter-right">E</span></h2>
             <div className="mainMenu-buttons">
                 <button id="start-btn" type="submit" className="menuBtn" onClick={goStart}>START GAME <i className="fa-solid fa-play"></i></button>
                 <button id="options-btn" type="submit" className="menuBtn" onClick={goOptions}>OPTIONS <i className="fa-solid fa-gear"></i></button>
                 <div>
-                    <button id="exit-btn" type="submit" className="menuBtn" onClick={goExit}>EXIT <i className="fa-solid fa-xmark"></i></button>
+                    <button id="exit-btn" type="submit" className="menuBtn" onClick={goExit}>EXIT <i class="fa-solid fa-person-running"></i></button>
                     <button id="change-btn" type="submit" className="menuBtn" onClick={goChangeAcc}>CHANGE ACCOUNT <i className="fa-solid fa-repeat"></i></button>
                 </div>
             </div>

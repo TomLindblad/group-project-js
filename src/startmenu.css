@@ -1,3 +1,41 @@
+.mainmenu-container{
+    background-color: #18b9ff;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-family: "Cherry Bomb One", serif;
+    font-size: 4rem;
+    letter-spacing: 3px;
+    margin: 0;
+    color: #ffcb5a;
+    text-shadow: -1px 10px 0 #1a1a1ac5, 3px 3px 0 #1a1a1ac5, 1px -2px 0 #000, -2px -2px 0 #000;
+}
+
+.title-snake{
+    position: relative;
+    top: -25px
+}
+
+.bigger-letter{
+    font-size: 5rem;
+    position: relative;
+    top: 12px;
+}   
+
+.letter-left{
+    left: -1px;
+}
+
+.letter-right{
+    right: -1px;
+}
+
 .mainMenu-buttons{
     display: flex;
     flex-direction: column;
@@ -15,7 +53,7 @@
     background: linear-gradient(180deg, #ffcb5a 0%, #ff9900 100%);
     border: solid 2px rgb(73, 73, 73);
     border-radius: 25px;
-    box-shadow: 0 9px #8b8b8bc0;
+    box-shadow: 0 9px #707070c0;
     transition: all 0.2s;
 }
     
