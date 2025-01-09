@@ -8,7 +8,7 @@ function Startpage(){
 
     const navigate = useNavigate();
     const startGame = () => {
-        navigate('/gamepage');
+        navigate('/startmenu');
     };
     const goToStartmenu = () => {
         navigate('/startmenu');
@@ -221,7 +221,7 @@ function Startpage(){
                                 required
                                 onChange={(e) => checkPassInput(e.target.value)}></input><i className={smileypass}></i>
                         </div>
-                        <button id="login-btn" type="submit" onClick={checkSignin}>PLAY <i className="fa-solid fa-play"></i></button>
+                        <button id="login-btn" type="submit" onClick={checkSignin}>SIGN IN <i className="fa-solid fa-play"></i></button>
                     </div>
                 </form>
                 <div className={showNewUserInput}>
@@ -263,7 +263,6 @@ function Startpage(){
                 </div>
             </div>
             <br/>
-            <button onClick={() => goToStartmenu()}>StartMenu</button>
         </>
     );
 };

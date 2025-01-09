@@ -1,0 +1,39 @@
+.mainMenu-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menuBtn{
+    margin-top: 25px;
+    padding: 10px 15px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background: linear-gradient(180deg, #ffcb5a 0%, #ff9900 100%);
+    border: solid 2px rgb(73, 73, 73);
+    border-radius: 25px;
+    box-shadow: 0 9px #8b8b8bc0;
+    transition: all 0.2s;
+}
+    
+#start-btn:hover, #options-btn:hover, #change-btn:hover {
+    background: linear-gradient(180deg, #67c56a 0%, #02be09 100%);
+}
+
+#exit-btn:hover {
+    background: linear-gradient(180deg, #f85a5a 0%, #ff0000 100%);
+}
+
+.menuBtn:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+#change-btn, #exit-btn{
+    font-size: 13px;
+    margin-left: 10px;
+}
