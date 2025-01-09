@@ -1,13 +1,17 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import '../startpage.css';
 
+
 function Startpage(){
-    
+
     const navigate = useNavigate();
     const startGame = () => {
         navigate('/gamepage');
+    };
+    const goToStartmenu = () => {
+        navigate('/startmenu');
     };
 
     // created users-array. 
@@ -15,9 +19,9 @@ function Startpage(){
         {username: 'admin', password: 'password'},
         {username: 'discodevil69', password: '1234'},
         {username: '1337_assblaster', password: 'asdf'}];
-
+  
     const [newUsersArray, setNewUsersArray] = useState(usersArray);
-
+    
     // Input for SIGN IN. 
     const [userInput, setUserInput] = useState();
     const [passInput, setPassInput] = useState();
@@ -25,6 +29,13 @@ function Startpage(){
     // Input for NEW USER.
     const [newUserInput, setNewUserInput] = useState("");
     const [newPassInput, setNewPassInput] = useState("");
+
+
+    ////////////////       TRYING TO MAKE THE LOCALSTORAGE THING WORK          ///////////////
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////
 
     const [showInput, setShowInput] = useState(false);
     let showNewUserInput = 'createNewUserContainer ';
@@ -252,7 +263,7 @@ function Startpage(){
                 </div>
             </div>
             <br/>
-            <button onClick={checkarray}>check array</button>
+            <button onClick={() => goToStartmenu()}>StartMenu</button>
         </>
     );
 };

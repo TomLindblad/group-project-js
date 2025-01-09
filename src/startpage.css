@@ -3,10 +3,11 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: "DynaPuff", serif;;
 }
 
 .login-container{
-    background-color: rgba(152, 184, 39, 0.247);
+    background: linear-gradient(160deg, #ffcb5a 0%, #feffcc 100%);
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -22,7 +23,7 @@ body{
 }
 
 .input-bar{
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 2px 7px 2px 2px;
     border: 2px solid rgba(0, 0, 0, 0.397);
     border-radius: 10px;
@@ -32,7 +33,7 @@ body{
     position: relative;
     top: 4px;
     text-align: center;
-    background-color: white;
+    background-color: transparent;
     font-size: 1.5rem;
 }
 
@@ -45,6 +46,7 @@ body{
 }
 
 .inputfield{
+    background-color: transparent;
     width: 250px;
     padding: 10px;
     border: none;
@@ -60,29 +62,31 @@ body{
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #fa800d;
-    border: none;
-    border-radius: 15px;
-    box-shadow: 0 9px #8b8b8b;
+    background: linear-gradient(180deg, #ffcb5a 0%, #ff9900 100%);
+    border: solid 2px rgb(73, 73, 73);
+    border-radius: 25px;
+    box-shadow: 0 9px #8b8b8bc0;
     transition: all 0.2s;
 }
 
-#login-btn:hover {background-color: #67c56a}
+#login-btn:hover {
+    background: linear-gradient(180deg, #67c56a 0%, #02be09 100%);
+}
 
 #login-btn:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
-  }
+}
 
-  .bottom-container{
+.bottom-container{
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-  }
+}
 
-  .bottom-link{
+.bottom-link{
     margin: 0 15px;
     padding: 5px 15px;
     font-size: 1rem;
@@ -90,20 +94,23 @@ body{
     cursor: pointer;
     outline: none;
     color: #fff;
-    background-color: #fa800d;
-    border: none;
-    border-radius: 9px;
-    box-shadow: 0 9px #8b8b8b;
+    background: linear-gradient(180deg, #ffcb5a 0%, #ff9900 100%);
+    border: solid 2px rgb(73, 73, 73);
+    border-radius: 25px;
+    box-shadow: 0 9px #8b8b8bc0;
     transition: all 0.2s;
-  }
+}
 
-  .bottom-link:hover {background-color: #67c56a}
+.bottom-link:hover{
+    background: linear-gradient(180deg, #67c56a 0%, #02be09 100%);
+}
 
-  .bottom-link:active {
+.bottom-link:active {
     background-color: #3e8e41;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
-  }
+}
+
 .hidden{
     display: none;
 }
